@@ -1,0 +1,51 @@
+
+<div class="container">
+
+  <label for="termino"> Retiro de Vehiculos</label>
+
+    <input [(ngModel)]="placa" (keyup)="busqueda()"
+    type="text" name="placa"
+    class="form-control" placeholder="Escriba Placa">
+   <hr>
+  <div *ngIf="boCode">
+    <p> Id registro : {{registrobusqueda.id}}</p>
+    <p> Placa:        {{registrobusqueda.placa}}</p>
+    <p> Tipo Vehiculo:{{registrobusqueda.tipoVehiculo.descripcion}}</p>
+    <p> fecha Ingreso:{{registrobusqueda.fechaIngreso |date:'short' }}</p>
+    <p> Recargo       {{registrobusqueda.recargo}}</p>
+
+    <div class="form-group row"  >
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+          <button type="submit" (click)="retirar()" class="btn btn-outline-primary">
+            Retirar
+
+          </button>
+        </div>
+      </div>
+      <div>
+        {{mensaje}}
+      </div>
+
+  </div>
+
+    <div *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+   	 Article added successfully.
+
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+           Article already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+           Vehiculo retirado correctamente encontrado por valor de .
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+           Article deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+          vehiculo no encontrado.
+      </div>
+
+
+</div>

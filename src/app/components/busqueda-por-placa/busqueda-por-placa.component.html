@@ -1,0 +1,36 @@
+
+<div class="container">
+
+  <label for="termino"> Busqueda por Placa </label>
+
+    <input [(ngModel)]="placa" (keyup)="busqueda()"
+    type="text" name="placa"
+    class="form-control" placeholder="Escriba Placa">
+   <hr>
+  <div *ngIf="boCode">
+    <p> Id registro : {{registro.id}}</p>
+    <p> Placa:        {{registro.placa}}</p>
+    <p> Tipo Vehiculo:{{registro.tipoVehiculo.descripcion}}</p>
+    <p> fecha Ingreso:{{registro.fechaIngreso |date:'short' }}</p>
+    <p> fecha Salida: {{registro.fechaSalida |date:'short' }}</p>
+    <p> Recargo       {{registro.recargo}}</p>
+    <p> Valor         {{registro.valor |currency:'COP'  }}</p>
+  </div>
+
+   <div *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+   	 Article added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+           Article already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+           Vehiculo encontrado.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+           Article deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+          vehiculo no encontrado.
+      </div>
+</div>

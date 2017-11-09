@@ -1,0 +1,60 @@
+
+
+ <hr>
+<form (ngSubmit)="registrar(forma)" #forma="ngForm">
+  <div class="form-group row" [ngClass]="{'has-danger': (placa.errors?.required)&&(placa.touched)} ">
+        <label class="col-2 col-form-label">Placa</label>
+        <div class="col-8">
+          <input class="form-control"
+                 type="text"
+    
+                 name="placa"
+                 required
+                 ngModel
+                 #placa="ngModel">
+
+                 <div *ngIf="placa.errors?.required" class="form-control-feedback">
+                   Este campo es requerido
+                 </div>
+        </div>
+
+
+      </div>
+
+
+<div class="form-group row" >
+<label for="example-text-input" class="col-2 col-form-label">Vehiculo: </label>
+<div class="col-10">
+<select class="form-control" ngModel name= "tipovehiculo" required >
+     <option *ngFor="let vehiculo of Alltipovehiculo" [value]="vehiculo.id">    {{vehiculo.descripcion}}</option>
+   </select>
+</div>
+</div>
+
+<div class="form-group row">
+  <div class="col-10">
+     <div class="checkbox">
+       <label><input class="form-control"  name= "recargo"
+         ngModel type="checkbox">Recargo</label>
+     </div>
+  </div>
+</div>
+<div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="statusCode; else processing">
+     <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+         Vehiculo Ingresado correctamente
+     </div>
+     <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+        {{mensaje}}
+     </div>
+
+  </div>
+</form>
